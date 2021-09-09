@@ -1,4 +1,8 @@
 import React from 'react';
+
+import { Feather } from '@expo/vector-icons';
+import { useTheme } from 'styled-components';
+
 import { BackButton } from '../../components/BackButton';
 import { ImageSlider } from '../../components/ImageSlider';
 
@@ -21,14 +25,26 @@ import {
   Rent,
   Period,
   Price,
-  About,
   Acessories,
-  Footer
+  Footer,
+  RentalPeriod,
+  DateInfo,
+  DateTitle,
+  DateValue,
+  CalendarIcon,
+  RentalPrice,
+  RentalPriceLabel,
+  RentalPriceDetails,
+  RentalPriceQuota,
+  RentalPriceTotal,
 } from './styles'
 import { Acessory } from '../../components/Acessory';
 import { Button } from '../../components/Button';
+import { RFValue } from 'react-native-responsive-fontsize';
 
-export function CarDetails() {
+export function ScheduleDetails() {
+  const theme = useTheme();
+
   return (
     <Container>
       <Header>
@@ -61,9 +77,42 @@ export function CarDetails() {
           <Acessory name="2 pessoas" icon={PeopleSvg} />
         </Acessories>
 
-        <About>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. In doloremque incidunt suscipit pariatur accusamus harum, recusandae blanditiis quo officia fugiat quae itaque veritatis, dolorum esse architecto inventore. Fugiat, culpa illum!
-        </About>
+
+        <RentalPeriod>
+          <CalendarIcon>
+            <Feather
+              name="calendar"
+              size={RFValue(24)}
+              color={theme.colors.shape}
+            />
+          </CalendarIcon>
+
+          <DateInfo>
+            <DateTitle>De</DateTitle>
+            <DateValue>18/06/2021</DateValue>
+          </DateInfo>
+
+          <Feather
+            name="chevron-right"
+            size={RFValue(24)}
+            color={theme.colors.shape}
+          />
+
+          <DateInfo>
+            <DateTitle>Até</DateTitle>
+            <DateValue>18/06/2021</DateValue>
+          </DateInfo>
+
+        </RentalPeriod>
+
+        <RentalPrice>
+          <RentalPriceLabel>TOTAL</RentalPriceLabel>
+
+          <RentalPriceDetails>
+            <RentalPriceQuota>R$ 580 x3 diárias</RentalPriceQuota>
+            <RentalPriceTotal>R$ 1740</RentalPriceTotal>
+          </RentalPriceDetails>
+        </RentalPrice>
       </Content>
 
       <Footer>

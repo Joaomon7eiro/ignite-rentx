@@ -8,6 +8,9 @@ import { Home } from './src/screens/Home';
 import { ThemeProvider } from 'styled-components';
 import theme from './src/styles/theme';
 import { CarDetails } from './src/screens/CarDetails';
+import { Schedule } from './src/screens/Schedule';
+import { ScheduleDetails } from './src/screens/ScheduleDetails';
+import { ScheduleComplete } from './src/screens/ScheduleComplete';
 
 export default function App() {
 
@@ -21,8 +24,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {/* <Home /> */}
-      <CarDetails />
+      <ScheduleComplete />
     </ThemeProvider>
   );
 }
