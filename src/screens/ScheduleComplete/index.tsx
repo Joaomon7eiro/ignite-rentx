@@ -13,12 +13,26 @@ import {
   ButtonTitle,
   Footer
 } from './styles';
+import { StatusBar } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 export function ScheduleComplete() {
   const { width } = useWindowDimensions();
 
+  const navigation = useNavigation();
+
+
+  function handleHome() {
+    navigation.navigate('Home');
+  }
+
   return (
     <Container>
+      <StatusBar
+        barStyle="light-content"
+        translucent
+        backgroundColor="transparent"
+      />
       <LogoSvg width={width} />
 
       <Content>
@@ -35,7 +49,7 @@ export function ScheduleComplete() {
       </Content>
 
       <Footer>
-        <ConfirmButton>
+        <ConfirmButton onPress={handleHome}>
           <ButtonTitle>OK</ButtonTitle>
         </ConfirmButton>
       </Footer>

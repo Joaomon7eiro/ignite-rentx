@@ -2,13 +2,6 @@ import React from 'react';
 import { BackButton } from '../../components/BackButton';
 import { ImageSlider } from '../../components/ImageSlider';
 
-import SpeedSvg from '../../assets/speed.svg';
-import AccelerationSvg from '../../assets/acceleration.svg';
-import ForceSvg from '../../assets/force.svg';
-import ExchangeSvg from '../../assets/exchange.svg';
-import GasolineSvg from '../../assets/gasoline.svg';
-import PeopleSvg from '../../assets/people.svg';
-
 import {
   Container,
   Header,
@@ -27,47 +20,68 @@ import {
 } from './styles'
 import { Acessory } from '../../components/Acessory';
 import { Button } from '../../components/Button';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { CarDTO } from '../../dto/CarDTO';
+import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
+
+interface Params {
+  car: CarDTO;
+}
 
 export function CarDetails() {
+  const navigation = useNavigation();
+  const route = useRoute();
+
+  const { car } = route.params as Params;
+
+  function handleSchedule() {
+    navigation.navigate('Schedule', { car });
+  }
+
+  function handleGoBack() {
+    navigation.goBack();
+  }
+
   return (
     <Container>
       <Header>
-        <BackButton onPress={() => { }} />
+        <BackButton onPress={handleGoBack} />
       </Header>
 
       <SliderWrapper>
-        <ImageSlider imagesUrl={['https://carsguide-res.cloudinary.com/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_low/v1/editorial/vhs/Audi-RS5-Coupe.png', 'https://carsguide-res.cloudinary.com/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_low/v1/editorial/vhs/Audi-RS5-Coupe.png']} />
+        <ImageSlider imagesUrl={car.photos} />
       </SliderWrapper>
 
       <Content>
         <Details>
           <Description>
-            <Brand>Audi-RS5</Brand>
-            <Name>Audi-RS5</Name>
+            <Brand>{car.brand}</Brand>
+            <Name>{car.name}</Name>
           </Description>
 
           <Rent>
-            <Period>10 dias</Period>
-            <Price>R$ 200</Price>
+            <Period>{car.rent.period}</Period>
+            <Price>R$ {car.rent.price}</Price>
           </Rent>
         </Details>
 
         <Acessories>
-          <Acessory name="380Km/h" icon={SpeedSvg} />
-          <Acessory name="3.2s" icon={AccelerationSvg} />
-          <Acessory name="800 HP" icon={ForceSvg} />
-          <Acessory name="Gasolina" icon={GasolineSvg} />
-          <Acessory name="Auto" icon={ExchangeSvg} />
-          <Acessory name="2 pessoas" icon={PeopleSvg} />
+          {car.accessories.map((acessory) => {
+            return (
+              <Acessory
+                key={acessory.type}
+                name={acessory.name}
+                icon={getAccessoryIcon(acessory.type)}
+              />
+            )
+          })}
         </Acessories>
 
-        <About>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. In doloremque incidunt suscipit pariatur accusamus harum, recusandae blanditiis quo officia fugiat quae itaque veritatis, dolorum esse architecto inventore. Fugiat, culpa illum!
-        </About>
+        <About> {car.about} </About>
       </Content>
 
       <Footer>
-        <Button title="confirmar" onPress={() => { }} />
+        <Button title="confirmar" onPress={handleSchedule} />
       </Footer>
     </Container>
   );
