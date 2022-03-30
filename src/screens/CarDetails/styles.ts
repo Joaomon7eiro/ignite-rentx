@@ -1,4 +1,5 @@
 import { getBottomSpace, getStatusBarHeight } from 'react-native-iphone-x-helper';
+import Animated from 'react-native-reanimated';
 import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
 
@@ -17,17 +18,9 @@ export const Header = styled.View`
   margin-left: 24px;
 `;
 
-export const SliderWrapper = styled.View`
+export const SliderWrapper = styled(Animated.View)`
   margin-top: ${getStatusBarHeight() + 32}px;
 `;
-
-export const Content = styled.ScrollView.attrs({
-  contentContainerStyle: {
-    padding: 24,
-    alignItems: 'center'
-  },
-  showsVerticalScrollIndicator: false,
-})``;
 
 export const Details = styled.View`
   width: 100%;
@@ -37,7 +30,9 @@ export const Details = styled.View`
   justify-content: space-around;
 `;
 
-export const Description = styled.View``;
+export const Description = styled.View`
+  flex: 1;
+`;
 
 export const Brand = styled.Text`
   font-family: ${({ theme }) => theme.fonts.secondary_500};
