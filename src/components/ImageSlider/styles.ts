@@ -34,7 +34,6 @@ export const CarImageWrapper = styled.View`
 
   justify-content: center;
   align-items: center;
-
 `;
 
 export const CarImage = styled.Image`

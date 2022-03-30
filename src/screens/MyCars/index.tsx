@@ -27,7 +27,7 @@ import { Car } from '../../components/Car';
 import { Loading } from '../../components/Loading';
 
 interface CarProps {
-  car: CarDTO[];
+  car: CarDTO;
   user_id: string;
   id: string;
   startDate: string;
@@ -35,7 +35,7 @@ interface CarProps {
 }
 
 export function MyCars() {
-  const [cars, setCars] = useState<CarProps>({} as CarProps);
+  const [cars, setCars] = useState<CarProps[]>([] as CarProps[]);
   const [loading, setLoading] = useState(true);
 
   const navigation = useNavigation();
@@ -94,7 +94,7 @@ export function MyCars() {
 
           <FlatList
             data={cars}
-            keyExtractor={item => item.id}
+            keyExtractor={item => String(item.id)}
             showsVerticalScrollIndicator={false}
             renderItem={({ item }) => {
               return (
