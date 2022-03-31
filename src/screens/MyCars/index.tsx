@@ -24,7 +24,7 @@ import {
 } from './styles';
 import { useNavigation } from '@react-navigation/core';
 import { Car } from '../../components/Car';
-import { Loading } from '../../components/Loading';
+import { LoadingAnimation as Loading } from '../../components/LoadingAnimation';
 
 interface CarProps {
   car: CarDTO;
